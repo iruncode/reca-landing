@@ -19,7 +19,7 @@
 
 ## Déploiement
 - Cible principale : Netlify (`netlify.toml` → build `npm run build`, publish `dist/`, functions `netlify/functions`).
-- `vercel.json` (`outputDirectory: dist`) ajouté le 2026-07-19 pour permettre aussi un build sur Vercel (l'erreur initiale : Vercel cherchait un dossier `build` par défaut, Vite sort dans `dist`).
+- `vercel.json` (`outputDirectory: dist`) ajouté le 2026-07-19 pour permettre aussi un build sur Vercel (l'erreur initiale : Vercel cherchait un dossier `build` par défaut, Vite sort dans `dist`). Confirmé fonctionnel par l'utilisateur — Vercel est maintenant un déploiement actif du site, pas juste théorique.
 - **Contrainte connue** : `netlify/functions/contact.js` utilise le format Netlify (`exports.handler(event)`), incompatible avec Vercel tel quel. Si Vercel devient la cible de déploiement réelle, il faudra migrer cette fonction vers le format `/api` de Vercel — sinon le formulaire de contact échoue silencieusement (route `/.netlify/functions/contact` inexistante sur Vercel).
 - Décision utilisateur (2026-07-19) : ne pas migrer la fonction maintenant ("pas tout de suite"). Ne pas le faire de façon proactive — attendre une demande explicite.
 
