@@ -34,3 +34,38 @@ There is no test script or linter configured.
 ## Deployment
 
 Designed for Netlify (static publish of `dist/` + Netlify Functions). Set `RESEND_API_KEY` in the site's environment variables before the contact form can send real email. The `from` address in `netlify/functions/contact.js` uses Resend's test domain (`onboarding@resend.dev`) until a real sending domain is verified in Resend — update `FROM_EMAIL` once that's done.
+
+A `vercel.json` (`outputDirectory: dist`) was added so the project can also build on Vercel. Note: `netlify/functions/contact.js` uses Netlify's function format (`exports.handler(event)`), which is **not** compatible with Vercel as-is — if Vercel ever becomes the deploy target, the contact form needs to be migrated to Vercel's `/api` format first, or it will silently fail.
+
+## Memory system (`memory/`)
+
+To keep context and task state consistent across sessions, this repo has a `memory/` folder at the root with four files:
+
+```
+memory/
+├── memory.md      — permanent project context
+├── tasks.md       — task list (todo / in progress / done)
+├── plans.md       — detailed plans for in-progress or upcoming work
+└── file-index.md  — reference table: which files belong to which page section
+```
+
+- **`memory/memory.md`** — context that must never be lost: brand tone/colors/fonts, technical decisions and why, client-specific constraints, things tried and rejected.
+- **`memory/tasks.md`** — tasks with three statuses: `[ ]` todo, `[~]` in progress, `[x]` done. Each done task keeps a short completion note.
+- **`memory/plans.md`** — before any non-trivial task (new section, new feature, redesign), write the plan here first: goal, steps, files touched, risks. Implement only after.
+- **`memory/file-index.md`** — reference table mapping each page section to its exact files, plus a shared/cross-cutting section.
+
+### Update protocol — MANDATORY
+
+**At the start of every task:**
+1. Read `memory/memory.md` in full
+2. Read `memory/tasks.md` for current state
+3. If the task touches an existing section, check `memory/file-index.md` for the exact file list
+4. If the task is non-trivial, write or update the plan in `memory/plans.md` before coding
+
+**At the end of every task:**
+1. Update `memory/tasks.md` (status + completion note)
+2. Add any new decision or constraint to `memory/memory.md`
+3. Check off/archive the plan in `memory/plans.md`
+4. If files were added, removed, or moved, update `memory/file-index.md`
+
+Never consider a task "done" until these files are up to date — a task not reflected in `memory/` doesn't exist for the next session.
