@@ -23,5 +23,14 @@
 - **Contrainte connue** : `netlify/functions/contact.js` utilise le format Netlify (`exports.handler(event)`), incompatible avec Vercel tel quel. Si Vercel devient la cible de déploiement réelle, il faudra migrer cette fonction vers le format `/api` de Vercel — sinon le formulaire de contact échoue silencieusement (route `/.netlify/functions/contact` inexistante sur Vercel).
 - Décision utilisateur (2026-07-19) : ne pas migrer la fonction maintenant ("pas tout de suite"). Ne pas le faire de façon proactive — attendre une demande explicite.
 
+## Refonte v2 (branche `landing-v2-optimisation`)
+- Branche non fusionnée dans `main`, travail en cours (non commité au 2026-07-25).
+- Nouvelle structure de sections (voir `memory/file-index.md` à jour) : `Nav`, `Hero`, `TrustBar`, `Problems`, `Solutions`, `HowItWorks`, `Services`, `Included`, `TaxCredit`, `SocialProof`, `Zones`, `Faq`, `ContactForm`, `Footer`, `MobileStickyBar`.
+- `WhyReca` → renommé `Solutions` ; `Testimonials` → renommé `SocialProof` (le contenu témoignages a été retiré, `SocialProof` n'est plus qu'un bloc texte "qui sommes-nous").
+- `ContactForm` n'est plus un formulaire simple : c'est un wizard à 3 étapes (adresse → type d'entrée/services → coordonnées) avec `useState` (plus d'uncontrolled form). La fonction Netlify (`netlify/functions/contact.js`) a déjà été mise à jour en conséquence (champs `adresse`, `typeEntree`, `services[]`, `prenom`, `telephone`, `courriel`, `site_web`) — cohérente avec le nouveau payload.
+- Nouveau fichier `src/data/zones.ts` : la liste `ZONES` a été extraite de `Zones.tsx`/`Footer.tsx` vers un module partagé (les deux composants l'importent).
+- **Piège identifié le 2026-07-25** : les 6 nouveaux composants (`TrustBar`, `Problems`, `Included`, `TaxCredit`, `Faq`, `MobileStickyBar`) + le wizard de `ContactForm` avaient été codés avec des classNames spécifiques, mais le CSS correspondant n'avait jamais été ajouté à `src/styles/global.css` — la page se serait affichée non stylée. Corrigé dans cette session (tout le CSS manquant ajouté, dans le même style que l'existant : tokens `--navy/--red/--cyan/--ice/--steel`, `--radius`, `--shadow`, grilles responsives aux mêmes breakpoints 900/800/700/640/560/500/480px).
+- Si une future session touche à ces sections et voit des classNames sans règle CSS correspondante, c'est probablement le même piège qui se reproduit — vérifier systématiquement (`grep className` vs `grep` dans `global.css`) avant de considérer un composant "fini".
+
 ## Essayé et rejeté
 - (rien à ce jour)

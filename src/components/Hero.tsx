@@ -7,23 +7,23 @@ export default function Hero() {
       <Snow />
       <div className="container hero-inner">
         <div>
-          <span className="eyebrow mono">Saint-Jérôme · Laurentides</span>
+          <span className="eyebrow mono">Déneigement résidentiel · Saint-Jérôme et les environs</span>
           <h1>
-            La neige tombe.<br />Nous sommes déjà <span className="accent">en route</span>.
+            Déneigement résidentiel à Saint-Jérôme : cet hiver, ne pelletez <span className="accent">plus jamais</span>.
           </h1>
           <p className="hero-lede">
-            Groupe RÉCA surveille l'accumulation en continu. Dès <strong className="mono">5&nbsp;cm</strong>, un
-            opérateur dédié est déployé sur votre propriété — dégagement garanti avant{' '}
-            <strong className="mono">07:00</strong>, résidentiel comme commercial.
+            Dès <strong className="mono">5&nbsp;cm</strong> de neige, on passe — automatiquement. Bordages du
+            chasse-neige municipal inclus. Prix fixe pour toute la saison, aucune surprise.
           </p>
           <div className="hero-ctas">
-            <a className="btn btn-primary" href="#contact">Demander une soumission gratuite</a>
+            <a className="btn btn-primary" href="#contact">Obtenir ma soumission gratuite →</a>
             <a className="btn btn-ghost" href="tel:+15793681280">Appeler (579) 368-1280</a>
           </div>
+          <p className="hero-microcopy">2 minutes · Sans engagement · Réponse en 24 h</p>
           <div className="hero-trust">
             <div><span className="num">5 cm</span><span className="label">Seuil de déclenchement</span></div>
-            <div><span className="num">07:00</span><span className="label">Dégagement garanti</span></div>
-            <div><span className="num">24/7</span><span className="label">Surveillance en tempête</span></div>
+            <div><span className="num">Inclus</span><span className="label">Bordages municipaux</span></div>
+            <div><span className="num">24/7</span><span className="label">7 jours sur 7, tout l'hiver</span></div>
           </div>
         </div>
 

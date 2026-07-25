@@ -6,13 +6,19 @@ Référence à consulter avant toute exploration du repo. `src/App.tsx` assemble
 |----------------|------------------------------------------|
 | Nav            | `src/components/Nav.tsx`                |
 | Hero           | `src/components/Hero.tsx`, `src/components/Gauge.tsx`, `src/components/Snow.tsx` |
+| TrustBar       | `src/components/TrustBar.tsx`           |
+| Problems       | `src/components/Problems.tsx`           |
+| Solutions      | `src/components/Solutions.tsx` (ex-`WhyReca.tsx`) |
 | HowItWorks     | `src/components/HowItWorks.tsx`         |
 | Services       | `src/components/Services.tsx`           |
-| WhyReca        | `src/components/WhyReca.tsx`            |
-| Zones          | `src/components/Zones.tsx`              |
-| Testimonials   | `src/components/Testimonials.tsx`       |
-| ContactForm    | `src/components/ContactForm.tsx`        |
-| Footer         | `src/components/Footer.tsx`             |
+| Included       | `src/components/Included.tsx`           |
+| TaxCredit      | `src/components/TaxCredit.tsx`          |
+| SocialProof    | `src/components/SocialProof.tsx` (ex-`Testimonials.tsx`) |
+| Zones          | `src/components/Zones.tsx`, `src/data/zones.ts` |
+| Faq            | `src/components/Faq.tsx`                |
+| ContactForm    | `src/components/ContactForm.tsx` (wizard 3 étapes, `useState`) |
+| Footer         | `src/components/Footer.tsx`, `src/data/zones.ts` |
+| MobileStickyBar| `src/components/MobileStickyBar.tsx` (barre fixe bas d'écran, visible <700px) |
 
 ## Partagé / transverse
 - `src/components/icons.tsx` — icônes SVG réutilisées (check, map pin, phone, mail, menu). Les icônes spécifiques à une section (radar, truck, house, shield, etc.) sont inlinées directement dans leur composant.

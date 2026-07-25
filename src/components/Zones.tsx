@@ -1,13 +1,5 @@
 import { MapPinIcon } from './icons';
-
-const ZONES = [
-  'Saint-Jérôme (centre-ville)',
-  'Bellefeuille',
-  'Saint-Antoine',
-  'Lafontaine',
-  'Mirabel',
-  'Secteurs avoisinants',
-];
+import { ZONES } from '../data/zones';
 
 export default function Zones() {
   return (
@@ -15,8 +7,8 @@ export default function Zones() {
       <div className="container">
         <div className="section-head center">
           <span className="eyebrow" style={{ color: 'var(--cyan)' }}>Territoire</span>
-          <h2>Zones desservies</h2>
-          <p>Groupe RÉCA dessert Saint-Jérôme et les secteurs environnants.</p>
+          <h2>Nos secteurs de déneigement</h2>
+          <p>Nous desservons le grand Saint-Jérôme et ses environs, dans les Laurentides.</p>
         </div>
         <div className="zones-grid">
           {ZONES.map((zone) => (
@@ -27,9 +19,9 @@ export default function Zones() {
           ))}
         </div>
         <p className="zones-note">
-          Votre adresse n'apparaît pas ici?{' '}
-          <a href="#contact" style={{ color: 'var(--cyan)', textDecoration: 'underline' }}>Écrivez-nous</a> — nous
-          étendons régulièrement notre territoire.
+          Votre secteur n'est pas dans la liste?{' '}
+          <a href="#contact" style={{ color: 'var(--cyan)', textDecoration: 'underline' }}>Demandez quand même votre soumission</a> — nos
+          routes évoluent chaque saison.
         </p>
       </div>
     </section>

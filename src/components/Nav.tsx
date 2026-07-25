@@ -4,9 +4,9 @@ import { MenuIcon } from './icons';
 const LINKS = [
   { href: '#comment-ca-marche', label: 'Comment ça marche' },
   { href: '#services', label: 'Services' },
-  { href: '#pourquoi', label: 'Pourquoi RÉCA' },
+  { href: '#credit-impot', label: "Crédit d'impôt" },
   { href: '#zones', label: 'Zones desservies' },
-  { href: '#temoignages', label: 'Témoignages' },
+  { href: '#faq', label: 'FAQ' },
 ];
 
 export default function Nav() {
@@ -30,7 +30,7 @@ export default function Nav() {
         </nav>
         <div className="nav-actions">
           <a className="nav-phone" href="tel:+15793681280">(579) 368-1280</a>
-          <a className="btn btn-primary" href="#contact">Demander une soumission</a>
+          <a className="btn btn-primary" href="#contact">Soumission gratuite</a>
           <button
             className="nav-toggle"
             id="nav-toggle"

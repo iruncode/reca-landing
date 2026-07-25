@@ -14,7 +14,7 @@ const PHASES: Phase[] = [
   { pct: 0, cm: 0.0, label: 'Surveillance active…', active: false, duration: 0 },
   { pct: THRESHOLD_PCT, cm: 5.0, label: 'Seuil de 5 cm atteint — opérateur déployé', active: true, duration: 4200 },
   { pct: THRESHOLD_PCT, cm: 5.0, label: 'Passage de finition en cours…', active: true, duration: 2400 },
-  { pct: 6, cm: 0.2, label: 'Dégagement terminé avant 07:00 ✓', active: false, duration: 2600 },
+  { pct: 6, cm: 0.2, label: 'Passage effectué — entrée dégagée ✓', active: false, duration: 2600 },
 ];
 
 function useReducedMotion() {

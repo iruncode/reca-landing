@@ -8,8 +8,15 @@ const TO_EMAIL = 'info@groupereca.ca';
 // En attendant, le domaine de test "onboarding@resend.dev" fonctionne pour les envois de démo.
 const FROM_EMAIL = 'Groupe RÉCA <onboarding@resend.dev>';
 
-const REQUIRED_FIELDS = ['nom', 'telephone', 'courriel', 'typePropriete', 'adresse'];
+const REQUIRED_FIELDS = ['prenom', 'telephone', 'courriel', 'adresse', 'typeEntree'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ALLOWED_TYPES_ENTREE = [
+  'Entrée simple (1-2 autos)',
+  'Entrée double (3-4 autos)',
+  'Grande entrée ou en pente',
+  'Multilogement ou commercial',
+];
+const ALLOWED_SERVICES = ['Déneigement complet', 'Sable et sel', 'Bordages seulement'];
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, function (char) {
@@ -44,27 +51,35 @@ exports.handler = async function (event) {
     return { statusCode: 400, body: JSON.stringify({ ok: false, error: 'Courriel invalide.' }) };
   }
 
+  if (!ALLOWED_TYPES_ENTREE.includes(data.typeEntree)) {
+    return { statusCode: 400, body: JSON.stringify({ ok: false, error: "Type d'entrée invalide." }) };
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error('RESEND_API_KEY manquante dans les variables d\'environnement.');
     return { statusCode: 500, body: JSON.stringify({ ok: false, error: 'Configuration serveur manquante.' }) };
   }
 
-  const nom = escapeHtml(data.nom).slice(0, 200);
+  const prenom = escapeHtml(data.prenom).slice(0, 200);
   const telephone = escapeHtml(data.telephone).slice(0, 60);
   const courriel = escapeHtml(data.courriel).slice(0, 200);
-  const typePropriete = escapeHtml(data.typePropriete).slice(0, 60);
+  const typeEntree = escapeHtml(data.typeEntree).slice(0, 80);
   const adresse = escapeHtml(data.adresse).slice(0, 300);
-  const message = escapeHtml(data.message || '(aucun message)').slice(0, 2000);
+  const services = (Array.isArray(data.services) ? data.services : [])
+    .filter((s) => ALLOWED_SERVICES.includes(s))
+    .slice(0, ALLOWED_SERVICES.length)
+    .map((s) => escapeHtml(s))
+    .join(', ') || '(non précisé)';
 
   const html = `
     <h2>Nouvelle demande de soumission — Groupe RÉCA</h2>
-    <p><strong>Nom :</strong> ${nom}</p>
+    <p><strong>Prénom :</strong> ${prenom}</p>
     <p><strong>Téléphone :</strong> ${telephone}</p>
     <p><strong>Courriel :</strong> ${courriel}</p>
-    <p><strong>Type de propriété :</strong> ${typePropriete}</p>
+    <p><strong>Type d'entrée :</strong> ${typeEntree}</p>
+    <p><strong>Services souhaités :</strong> ${services}</p>
     <p><strong>Adresse :</strong> ${adresse}</p>
-    <p><strong>Message :</strong><br>${message.replace(/\n/g, '<br>')}</p>
   `;
 
   try {
@@ -78,7 +93,7 @@ exports.handler = async function (event) {
         from: FROM_EMAIL,
         to: [TO_EMAIL],
         reply_to: data.courriel,
-        subject: `Nouvelle demande de soumission — ${data.nom}`,
+        subject: `Nouvelle demande de soumission — ${data.prenom}`,
         html
       })
     });
