@@ -32,5 +32,15 @@
 - **Piège identifié le 2026-07-25** : les 6 nouveaux composants (`TrustBar`, `Problems`, `Included`, `TaxCredit`, `Faq`, `MobileStickyBar`) + le wizard de `ContactForm` avaient été codés avec des classNames spécifiques, mais le CSS correspondant n'avait jamais été ajouté à `src/styles/global.css` — la page se serait affichée non stylée. Corrigé dans cette session (tout le CSS manquant ajouté, dans le même style que l'existant : tokens `--navy/--red/--cyan/--ice/--steel`, `--radius`, `--shadow`, grilles responsives aux mêmes breakpoints 900/800/700/640/560/500/480px).
 - Si une future session touche à ces sections et voit des classNames sans règle CSS correspondante, c'est probablement le même piège qui se reproduit — vérifier systématiquement (`grep className` vs `grep` dans `global.css`) avant de considérer un composant "fini".
 
+## Branche `optimisation-mobile`
+- Créée depuis `landing-v2-optimisation` le 2026-07-25 pour un passage d'optimisation/correction de bugs desktop + mobile, vérifié avec Playwright (Chromium headless) dans ce sandbox.
+- Bugs mobiles réels trouvés et corrigés (tous dans `src/styles/global.css`) :
+  1. **CTA de nav qui wrap sur 2 lignes sous ~700px** — `.nav-actions .btn-primary` masqué sous 700px (le `MobileStickyBar` fournit déjà ce même CTA en permanence en bas d'écran, donc pas de perte fonctionnelle).
+  2. **Sections d'ancre cachées sous la nav sticky** — aucune section n'avait de `scroll-margin-top`, donc cliquer un lien de nav/footer (`#faq`, `#zones`, etc.) faisait atterrir le titre de section derrière la nav. Ajouté `section[id] { scroll-margin-top: 88px; }` (88px couvre la hauteur mesurée de la nav sur desktop ~84.5px et mobile ~71px après le fix n°1).
+  3. **Bouton "Retour" du wizard de `ContactForm` qui devenait un cercle illisible sous 480px** — `.wizard-actions .btn { flex: 1 }` sans `min-width: 0` laissait le texte long "Recevoir ma soumission gratuite" (mots non sécables) forcer sa propre largeur minimale et écraser le bouton "Retour" à quasi rien ; comme les deux ont `border-radius: 999px`, "Retour" devenait un cercle. Corrigé avec `min-width: 0` + empilement `flex-direction: column-reverse` en pleine largeur sous 480px (CTA principal au-dessus).
+  4. Dépassement horizontal sub-pixel négligeable à 320px (~1px, un `<span>` de neige) — `overflow-x: hidden` ajouté sur `html` par précaution (n'affecte rien de visible).
+- Méthode de vérification : `npm run dev` + script Node/Playwright ad hoc (pas commité, vivait dans le scratchpad de la session) qui screenshot chaque section aux largeurs 1280/375/320/768/900px, clique tout le wizard de contact, ouvre le menu mobile, ouvre l'accordéon FAQ, clique les liens d'ancre de la nav, et vérifie qu'il n'y a aucune erreur console. Zéro erreur console sur les deux viewports après corrections.
+- Voir aussi la mémoire cross-session (hors dépôt) sur le comportement du téléchargement Chromium dans ce sandbox (lent, pas bloqué — ne pas tuer le process trop tôt).
+
 ## Essayé et rejeté
 - (rien à ce jour)

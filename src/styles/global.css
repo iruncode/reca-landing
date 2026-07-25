@@ -14,7 +14,7 @@
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -191,6 +191,15 @@
       width: 100%;
     }
   }
+  @media (max-width: 700px) {
+    /* En dessous de 700px, le bouton CTA de la nav n'a plus assez de place et
+       passe sur deux lignes ; la barre sticky mobile (MobileStickyBar) offre
+       déjà ce même CTA en permanence, donc on le retire de la nav ici. */
+    .nav-actions .btn-primary { display: none; }
+  }
+
+  /* Décalage pour que les ancres (#faq, #zones, etc.) ne s'arrêtent pas sous la nav sticky */
+  section[id] { scroll-margin-top: 88px; }
 
   /* ---------- HERO ---------- */
   .hero {
@@ -698,7 +707,14 @@
   .choice-checkbox input { flex: none; accent-color: var(--red); }
   .choice-checkbox.is-selected { border-color: var(--red); background: var(--white); }
   .wizard-actions { display: flex; gap: 14px; margin-top: 4px; }
-  .wizard-actions .btn { flex: 1; }
+  .wizard-actions .btn { flex: 1; min-width: 0; }
+  @media (max-width: 480px) {
+    /* Sous 480px, "Recevoir ma soumission gratuite" force le bouton Retour à
+       rétrécir jusqu'à devenir un cercle (min-width:auto des flex items) --
+       on empile les deux boutons en pleine largeur, le CTA principal en haut. */
+    .wizard-actions { flex-direction: column-reverse; gap: 10px; }
+    .wizard-actions .btn { width: 100%; }
+  }
   .wizard-done { text-align: center; padding: 24px 4px; }
   .wizard-done h3 { font-size: 1.3rem; }
 
