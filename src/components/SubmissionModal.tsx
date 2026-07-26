@@ -1,14 +1,12 @@
 import { useEffect, useRef } from 'react';
+import ContactWizard from './ContactWizard';
 
-export type SubmissionType = 'residentiel' | 'commercial';
-
-interface SubmissionTypeModalProps {
+interface SubmissionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelect: (type: SubmissionType) => void;
 }
 
-export default function SubmissionTypeModal({ isOpen, onClose, onSelect }: SubmissionTypeModalProps) {
+export default function SubmissionModal({ isOpen, onClose }: SubmissionModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,16 +24,13 @@ export default function SubmissionTypeModal({ isOpen, onClose, onSelect }: Submi
   if (!isOpen) return null;
 
   return (
-    <div
-      className="submission-modal-overlay"
-      onClick={onClose}
-    >
+    <div className="submission-modal-overlay" onClick={onClose}>
       <div
         ref={dialogRef}
         className="submission-modal"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="submission-modal-title"
+        aria-label="Demande de soumission gratuite"
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
       >
@@ -47,23 +42,7 @@ export default function SubmissionTypeModal({ isOpen, onClose, onSelect }: Submi
         >
           ×
         </button>
-        <h2 id="submission-modal-title">Votre soumission est pour...</h2>
-        <div className="submission-modal-choices">
-          <button
-            type="button"
-            className="submission-modal-choice"
-            onClick={() => onSelect('residentiel')}
-          >
-            Particulier
-          </button>
-          <button
-            type="button"
-            className="submission-modal-choice"
-            onClick={() => onSelect('commercial')}
-          >
-            Commercial
-          </button>
-        </div>
+        <ContactWizard idPrefix="modal" />
       </div>
     </div>
   );

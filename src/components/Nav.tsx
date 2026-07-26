@@ -7,7 +7,11 @@ const LINKS = [
   { href: '#zones', label: 'Zones desservies' },
 ];
 
-export default function Nav() {
+interface NavProps {
+  onOpenModal: () => void;
+}
+
+export default function Nav({ onOpenModal }: NavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -28,7 +32,7 @@ export default function Nav() {
         </nav>
         <div className="nav-actions">
           <a className="nav-phone" href="tel:+15793681280">(579) 368-1280</a>
-          <a className="btn btn-primary" href="#contact">Soumission gratuite</a>
+          <button type="button" className="btn btn-primary" onClick={onOpenModal}>Soumission gratuite</button>
           <button
             className="nav-toggle"
             id="nav-toggle"

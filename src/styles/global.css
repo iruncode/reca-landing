@@ -497,12 +497,17 @@
   .cta-side .mono-list a { font-weight: 600; color: var(--navy); }
   .cta-side .mono-list a:hover { color: var(--red); }
 
-  form#contact-form {
+  form.wizard-form {
     background: var(--white);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: 36px;
     border: 1px solid #e9eef5;
+  }
+  .submission-modal form.wizard-form {
+    box-shadow: none;
+    border: none;
+    padding: 0;
   }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
@@ -698,7 +703,7 @@
   .sticky-btn-call { background: var(--ice); color: var(--navy); border: 1.5px solid #d7e0ea; }
   .sticky-btn-form { background: var(--red); color: var(--white); }
 
-  /* ---------- MODAL PARTICULIER / COMMERCIAL ---------- */
+  /* ---------- MODAL DE SOUMISSION ---------- */
   .submission-modal-overlay {
     position: fixed;
     inset: 0;
@@ -715,11 +720,12 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: 40px 32px;
-    max-width: 420px;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
     width: 100%;
-    text-align: center;
   }
-  .submission-modal h2 { font-size: 1.4rem; margin-bottom: 24px; }
+  .submission-modal form { text-align: left; }
   .submission-modal-close {
     position: absolute;
     top: 12px;
@@ -731,14 +737,17 @@
     color: var(--steel);
     cursor: pointer;
     padding: 6px 10px;
+    z-index: 1;
   }
   .submission-modal-close:hover { color: var(--navy); }
-  .submission-modal-choices {
+
+  /* Étape 0 du wizard : choix Particulier / Commercial (utilisé dans la page ET le modal) */
+  .wizard-type-choices {
     display: flex;
     flex-direction: column;
     gap: 14px;
   }
-  .submission-modal-choice {
+  .wizard-type-choice {
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 1rem;
@@ -750,7 +759,7 @@
     cursor: pointer;
     transition: border-color 0.15s ease, background 0.15s ease;
   }
-  .submission-modal-choice:hover { border-color: var(--red); background: var(--white); }
+  .wizard-type-choice:hover { border-color: var(--red); background: var(--white); }
 
   .visually-hidden {
     position: absolute;

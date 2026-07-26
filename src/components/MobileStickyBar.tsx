@@ -1,14 +1,18 @@
 import { PhoneIcon } from './icons';
 
-export default function MobileStickyBar() {
+interface MobileStickyBarProps {
+  onOpenModal: () => void;
+}
+
+export default function MobileStickyBar({ onOpenModal }: MobileStickyBarProps) {
   return (
     <div className="mobile-sticky-bar" aria-hidden={false}>
       <a className="sticky-btn sticky-btn-call" href="tel:+15793681280">
         <PhoneIcon size={18} /> Appeler
       </a>
-      <a className="sticky-btn sticky-btn-form" href="#contact">
+      <button type="button" className="sticky-btn sticky-btn-form" onClick={onOpenModal}>
         Soumission gratuite
-      </a>
+      </button>
     </div>
   );
 }

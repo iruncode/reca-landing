@@ -9,38 +9,28 @@ import Services from './components/Services';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import MobileStickyBar from './components/MobileStickyBar';
-import SubmissionTypeModal, { type SubmissionType } from './components/SubmissionTypeModal';
+import SubmissionModal from './components/SubmissionModal';
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [prefillType, setPrefillType] = useState<SubmissionType | null>(null);
-
-  function handleSelectType(type: SubmissionType) {
-    setPrefillType(type);
-    setModalOpen(false);
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  }
+  const openModal = () => setModalOpen(true);
 
   return (
     <>
       <a className="skip-link" href="#contenu-principal">Aller au contenu principal</a>
-      <Nav />
+      <Nav onOpenModal={openModal} />
       <main id="contenu-principal">
-        <Hero onOpenModal={() => setModalOpen(true)} />
+        <Hero onOpenModal={openModal} />
         <TrustBar />
         <TaxCredit />
         <Zones />
         <ProblemsSolutions />
         <Services />
-        <ContactForm prefillType={prefillType} />
+        <ContactForm />
       </main>
       <Footer />
-      <MobileStickyBar />
-      <SubmissionTypeModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onSelect={handleSelectType}
-      />
+      <MobileStickyBar onOpenModal={openModal} />
+      <SubmissionModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }
