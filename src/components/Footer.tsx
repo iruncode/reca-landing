@@ -28,8 +28,8 @@ export default function Footer() {
             <h4>Services</h4>
             <ul>
               <li><a href="#services">Déneigement complet</a></li>
-              <li><a href="#inclus">Enlèvement des bordages</a></li>
-              <li><a href="#inclus">Épandage sable et sel</a></li>
+              <li><a href="#services">Enlèvement des bordages</a></li>
+              <li><a href="#services">Épandage sable et sel</a></li>
               <li><a href="#contact">Soumission gratuite</a></li>
               <li><a href="https://groupereca.ca" target="_blank" rel="noopener noreferrer">groupereca.ca</a></li>
             </ul>

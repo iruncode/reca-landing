@@ -2,11 +2,9 @@ import { useState } from 'react';
 import { MenuIcon } from './icons';
 
 const LINKS = [
-  { href: '#comment-ca-marche', label: 'Comment ça marche' },
   { href: '#services', label: 'Services' },
   { href: '#credit-impot', label: "Crédit d'impôt" },
   { href: '#zones', label: 'Zones desservies' },
-  { href: '#faq', label: 'FAQ' },
 ];
 
 export default function Nav() {

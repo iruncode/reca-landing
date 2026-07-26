@@ -1,5 +1,6 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import { MapPinIcon, MailIcon, PhoneIcon } from './icons';
+import type { SubmissionType } from './SubmissionTypeModal';
 
 type Step = 1 | 2 | 3 | 'done';
 
@@ -41,12 +42,22 @@ const INITIAL_DATA: WizardData = {
   site_web: '',
 };
 
-export default function ContactForm() {
+interface ContactFormProps {
+  prefillType?: SubmissionType | null;
+}
+
+export default function ContactForm({ prefillType }: ContactFormProps) {
   const [step, setStep] = useState<Step>(1);
   const [data, setData] = useState<WizardData>(INITIAL_DATA);
   const [stepError, setStepError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+
+  useEffect(() => {
+    if (prefillType === 'commercial') {
+      setData((d) => ({ ...d, typeEntree: 'Multilogement ou commercial' }));
+    }
+  }, [prefillType]);
 
   function update<K extends keyof WizardData>(key: K, value: WizardData[K]) {
     setData((d) => ({ ...d, [key]: value }));
@@ -131,12 +142,7 @@ export default function ContactForm() {
     <section id="contact" className="cta-section">
       <div className="container cta-grid">
         <div className="cta-side">
-          <span className="eyebrow">Dernière étape</span>
-          <h2>Les places par secteur sont limitées — et l'hiver, lui, n'attend pas.</h2>
-          <p>
-            Chaque tracteur Groupe Réca suit une route fixe. Quand un secteur est complet, il est complet — souvent
-            bien avant la première bordée. Réservez votre place pour l'hiver 2026-2027 et rangez la pelle pour de bon.
-          </p>
+          <h2>Votre soumission gratuite</h2>
           <div className="mono-list">
             <div><PhoneIcon /> <a href="tel:+15793681280">(579) 368-1280</a></div>
             <div><MailIcon /> <a href="mailto:info@groupereca.ca">info@groupereca.ca</a></div>

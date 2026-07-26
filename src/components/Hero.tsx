@@ -1,7 +1,11 @@
 import Snow from './Snow';
 import Gauge from './Gauge';
 
-export default function Hero() {
+interface HeroProps {
+  onOpenModal: () => void;
+}
+
+export default function Hero({ onOpenModal }: HeroProps) {
   return (
     <section className="hero" id="accueil">
       <Snow />
@@ -16,7 +20,7 @@ export default function Hero() {
             chasse-neige municipal inclus. Prix fixe pour toute la saison, aucune surprise.
           </p>
           <div className="hero-ctas">
-            <a className="btn btn-primary" href="#contact">Obtenir ma soumission gratuite →</a>
+            <button type="button" className="btn btn-primary" onClick={onOpenModal}>Obtenir ma soumission gratuite →</button>
             <a className="btn btn-ghost" href="tel:+15793681280">Appeler (579) 368-1280</a>
           </div>
           <p className="hero-microcopy">2 minutes · Sans engagement · Réponse en 24 h</p>

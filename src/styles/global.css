@@ -198,7 +198,7 @@
     .nav-actions .btn-primary { display: none; }
   }
 
-  /* Décalage pour que les ancres (#faq, #zones, etc.) ne s'arrêtent pas sous la nav sticky */
+  /* Décalage pour que les ancres (#zones, #services, etc.) ne s'arrêtent pas sous la nav sticky */
   section[id] { scroll-margin-top: 88px; }
 
   /* ---------- HERO ---------- */
@@ -345,28 +345,27 @@
   }
   .trust-bar-sep { margin: 0 12px; color: var(--steel); font-weight: 400; }
 
-  /* ---------- PROBLÈMES ---------- */
-  .problems-grid {
+  /* ---------- ÇA VOUS DIT QUELQUE CHOSE / NOS SOLUTIONS (paires) ---------- */
+  .ps-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
-  @media (max-width: 900px) { .problems-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .problems-grid { grid-template-columns: 1fr; } }
-  .problem-card {
+  @media (max-width: 800px) { .ps-grid { grid-template-columns: 1fr; } }
+  .problem-solution-pair {
     background: var(--ice);
     border-radius: var(--radius);
     padding: 28px 22px;
     position: relative;
     border: 1px solid #e3ecf5;
   }
-  .problem-num {
+  .ps-num {
     font-size: 0.85rem;
     color: var(--red);
     display: block;
     margin-bottom: 14px;
   }
-  .problem-icon {
+  .ps-icon {
     width: 44px; height: 44px;
     border-radius: 10px;
     background: var(--navy);
@@ -374,42 +373,20 @@
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 16px;
   }
-  .problem-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
-  .problem-card p { font-size: 0.92rem; margin: 0; }
-
-  /* ---------- COMMENT ÇA MARCHE ---------- */
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+  .problem-solution-pair h3 { font-size: 1.05rem; margin-bottom: 8px; }
+  .problem-solution-pair p { font-size: 0.92rem; margin: 0; }
+  .ps-solution {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed #d7e0ea;
   }
-  @media (max-width: 800px) { .steps { grid-template-columns: 1fr; } }
-  .step-card {
-    background: var(--ice);
-    border-radius: var(--radius);
-    padding: 32px 26px;
-    position: relative;
-    border: 1px solid #e3ecf5;
-  }
-  .step-num {
-    font-family: var(--font-mono);
-    font-weight: 600;
+  .ps-solution .ps-icon { background: var(--red); color: var(--white); }
+  .ps-arrow {
+    display: flex;
+    justify-content: center;
     color: var(--red);
-    font-size: 0.85rem;
-    margin-bottom: 14px;
-    display: block;
+    margin: 4px 0;
   }
-  .step-icon {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    background: var(--navy);
-    color: var(--cyan);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 18px;
-  }
-  .step-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
-  .step-card p { font-size: 0.94rem; margin: 0; }
-  .steps-note { margin-top: 28px; font-size: 0.9rem; color: var(--steel); text-align: center; }
 
   /* ---------- SERVICES ---------- */
   .services-grid {
@@ -441,61 +418,6 @@
   .service-card.commercial li { color: rgba(245,248,252,0.85); }
   .service-card li svg { flex: none; margin-top: 3px; color: var(--red); }
   .service-card.commercial li svg { color: var(--cyan); }
-
-  /* ---------- SOLUTIONS ---------- */
-  .solutions-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-  }
-  @media (max-width: 900px) { .solutions-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .solutions-grid { grid-template-columns: 1fr; } }
-  .solution-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 28px 22px;
-    box-shadow: var(--shadow);
-    border: 1px solid #e9eef5;
-  }
-  .solution-num {
-    font-size: 0.85rem;
-    color: var(--red);
-    display: block;
-    margin-bottom: 14px;
-  }
-  .solution-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    background: var(--navy);
-    color: var(--cyan);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 16px;
-  }
-  .solution-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
-  .solution-card p { font-size: 0.92rem; margin: 0; }
-
-  /* ---------- CE QUI EST INCLUS ---------- */
-  .included-layout {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 40px;
-    align-items: start;
-  }
-  @media (max-width: 900px) { .included-layout { grid-template-columns: 1fr; } }
-  .included-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
-  .included-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.98rem; color: var(--navy-2); }
-  .included-list li svg { flex: none; margin-top: 4px; color: var(--red); }
-  .guarantees-box {
-    background: var(--ice);
-    border-radius: var(--radius);
-    padding: 28px;
-    border: 1px solid #e3ecf5;
-  }
-  .guarantees-box h3 { font-size: 1.05rem; margin-bottom: 16px; }
-  .guarantees-box p { display: flex; gap: 10px; align-items: flex-start; font-size: 0.92rem; margin: 0 0 14px; }
-  .guarantees-box p:last-child { margin-bottom: 0; }
-  .guarantees-box svg { flex: none; margin-top: 4px; color: var(--red); }
-  .guarantees-box strong { color: var(--navy); }
 
   /* ---------- CRÉDIT D'IMPÔT ---------- */
   .tax-credit-layout {
@@ -533,35 +455,6 @@
     margin-bottom: 16px;
   }
   .tax-credit-example p { color: rgba(245,248,252,0.78); font-size: 0.92rem; margin: 0; }
-
-  /* ---------- FAQ ---------- */
-  .faq-list { display: grid; gap: 12px; }
-  .faq-item {
-    background: var(--ice);
-    border: 1px solid #e3ecf5;
-    border-radius: var(--radius);
-    padding: 18px 22px;
-  }
-  .faq-item summary {
-    cursor: pointer;
-    font-weight: 700;
-    color: var(--navy);
-    font-size: 0.98rem;
-    list-style: none;
-    position: relative;
-    padding-right: 28px;
-  }
-  .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-item summary::after {
-    content: '+';
-    position: absolute;
-    right: 0;
-    top: -2px;
-    font-size: 1.3rem;
-    color: var(--red);
-  }
-  .faq-item[open] summary::after { content: '−'; }
-  .faq-item p { margin: 14px 0 0; font-size: 0.94rem; }
 
   /* ---------- ZONES ---------- */
   .zones-section { background: var(--navy); color: var(--white); }
@@ -804,6 +697,60 @@
   }
   .sticky-btn-call { background: var(--ice); color: var(--navy); border: 1.5px solid #d7e0ea; }
   .sticky-btn-form { background: var(--red); color: var(--white); }
+
+  /* ---------- MODAL PARTICULIER / COMMERCIAL ---------- */
+  .submission-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    background: rgba(10, 24, 48, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .submission-modal {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 40px 32px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+  }
+  .submission-modal h2 { font-size: 1.4rem; margin-bottom: 24px; }
+  .submission-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--steel);
+    cursor: pointer;
+    padding: 6px 10px;
+  }
+  .submission-modal-close:hover { color: var(--navy); }
+  .submission-modal-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .submission-modal-choice {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1.5px solid #d7e0ea;
+    background: var(--ice);
+    color: var(--navy);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .submission-modal-choice:hover { border-color: var(--red); background: var(--white); }
 
   .visually-hidden {
     position: absolute;

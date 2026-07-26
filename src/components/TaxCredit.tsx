@@ -3,7 +3,7 @@ export default function TaxCredit() {
     <section id="credit-impot" style={{ background: 'var(--navy)', color: 'var(--white)' }}>
       <div className="container tax-credit-layout">
         <div>
-          <span className="eyebrow">L'arme secrète</span>
+          <span className="eyebrow">Crédit d'impôt</span>
           <h2 style={{ color: 'var(--white)' }}>70 ans ou plus? Québec vous rembourse 40 % de votre déneigement.</h2>
           <p style={{ color: 'rgba(245,248,252,0.82)' }}>
             Le déneigement résidentiel est une dépense admissible au crédit d'impôt pour maintien à domicile des
