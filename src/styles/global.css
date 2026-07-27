@@ -107,15 +107,15 @@
     border-radius: 999px;
     border: 2px solid transparent;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   }
-  .btn:hover { transform: translateY(-1px); }
+  .btn:not([disabled]):hover { transform: scale(1.08); }
   .btn-primary { background: var(--red); color: var(--white); box-shadow: 0 8px 20px rgba(227, 57, 43, 0.35); }
-  .btn-primary:hover { background: #cf2e21; }
+  .btn-primary:not([disabled]):hover { background: #cf2e21; box-shadow: 0 10px 30px rgba(227, 57, 43, 0.5), 0 0 26px rgba(227, 57, 43, 0.55); }
   .btn-ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.35); }
-  .btn-ghost:hover { border-color: var(--white); }
+  .btn-ghost:not([disabled]):hover { border-color: var(--white); box-shadow: 0 0 22px rgba(255,255,255,0.4); }
   .btn-outline { background: transparent; color: var(--navy); border-color: var(--navy); }
-  .btn-outline:hover { background: var(--navy); color: var(--white); }
+  .btn-outline:not([disabled]):hover { background: var(--navy); color: var(--white); box-shadow: 0 0 22px rgba(10, 24, 48, 0.4); }
   .btn[disabled] { opacity: 0.6; cursor: not-allowed; transform: none; }
 
   /* ---------- NAV ---------- */
@@ -348,56 +348,67 @@
   /* ---------- ÇA VOUS DIT QUELQUE CHOSE / NOS SOLUTIONS (paires) ---------- */
   .ps-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 24px;
   }
-  @media (max-width: 800px) { .ps-grid { grid-template-columns: 1fr; } }
   .problem-solution-pair {
     background: var(--ice);
     border-radius: var(--radius);
-    padding: 28px 22px;
+    padding: 40px 44px;
     position: relative;
     border: 1px solid #e3ecf5;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 32px;
+  }
+  @media (max-width: 800px) {
+    .problem-solution-pair { grid-template-columns: 1fr; padding: 32px 26px; gap: 20px; }
   }
   .ps-num {
-    font-size: 0.85rem;
+    position: absolute;
+    top: 24px;
+    left: 44px;
+    font-size: 0.9rem;
     color: var(--red);
-    display: block;
-    margin-bottom: 14px;
   }
+  @media (max-width: 800px) { .ps-num { left: 26px; } }
   .ps-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
+    width: 56px; height: 56px;
+    border-radius: 12px;
     background: var(--navy);
     color: var(--cyan);
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
-  .problem-solution-pair h3 { font-size: 1.05rem; margin-bottom: 8px; }
-  .problem-solution-pair p { font-size: 0.92rem; margin: 0; }
-  .ps-solution {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px dashed #d7e0ea;
-  }
+  .ps-icon svg { width: 26px; height: 26px; }
+  .problem-solution-pair h3 { font-size: 1.35rem; margin-bottom: 12px; }
+  .problem-solution-pair p { font-size: 1.08rem; line-height: 1.6; margin: 0; }
+  .ps-problem { padding-top: 12px; }
   .ps-solution .ps-icon { background: var(--red); color: var(--white); }
   .ps-arrow {
     display: flex;
     justify-content: center;
     color: var(--red);
-    margin: 4px 0;
+    transform: rotate(-90deg);
+  }
+  .ps-arrow svg { width: 28px; height: 28px; }
+  @media (max-width: 800px) {
+    .ps-arrow { transform: none; padding: 4px 0; }
+    .ps-solution { padding-top: 20px; border-top: 1px dashed #d7e0ea; }
   }
 
   /* ---------- SERVICES ---------- */
+  #services .section-head p { font-size: 1.1rem; }
   .services-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    gap: 32px;
   }
   @media (max-width: 800px) { .services-grid { grid-template-columns: 1fr; } }
   .service-card {
     border-radius: var(--radius);
-    padding: 36px 32px;
+    padding: 48px 44px;
     box-shadow: var(--shadow);
     border: 1px solid #e9eef5;
   }
@@ -405,18 +416,21 @@
   .service-card.commercial { background: var(--navy); color: var(--white); }
   .service-card.commercial h3, .service-card.commercial p { color: var(--white); }
   .service-card.commercial p { color: rgba(245,248,252,0.78); }
+  .service-card h3 { font-size: 1.5rem; margin-bottom: 12px; }
+  .service-card > p { font-size: 1.12rem; line-height: 1.6; }
   .service-icon {
-    width: 52px; height: 52px;
-    border-radius: 14px;
+    width: 64px; height: 64px;
+    border-radius: 16px;
     background: var(--red);
     color: var(--white);
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
-  .service-card ul { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 10px; }
-  .service-card li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.94rem; color: var(--steel); }
+  .service-icon svg { width: 32px; height: 32px; }
+  .service-card ul { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 14px; }
+  .service-card li { display: flex; gap: 12px; align-items: flex-start; font-size: 1.08rem; color: var(--steel); }
   .service-card.commercial li { color: rgba(245,248,252,0.85); }
-  .service-card li svg { flex: none; margin-top: 3px; color: var(--red); }
+  .service-card li svg { flex: none; margin-top: 3px; width: 22px; height: 22px; color: var(--red); }
   .service-card.commercial li svg { color: var(--cyan); }
 
   /* ---------- CRÉDIT D'IMPÔT ---------- */
@@ -426,8 +440,10 @@
     gap: 48px;
     align-items: center;
   }
-  @media (max-width: 900px) { .tax-credit-layout { grid-template-columns: 1fr; } }
-  .tax-credit-finePrint { font-size: 0.78rem; color: rgba(245,248,252,0.55); margin-top: 20px; }
+  @media (max-width: 900px) { .tax-credit-layout { grid-template-columns: minmax(0, 1fr); } }
+  .tax-credit-layout h2 { font-size: clamp(1.9rem, 3vw, 2.5rem); }
+  .tax-credit-layout > div > p:not(.tax-credit-finePrint) { font-size: 1.15rem; line-height: 1.65; }
+  .tax-credit-finePrint { font-size: 0.88rem; color: rgba(245,248,252,0.55); margin-top: 20px; }
   .tax-credit-example {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.14);
@@ -438,7 +454,7 @@
   }
   .tax-credit-label {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--cyan);
@@ -450,11 +466,18 @@
     align-items: baseline;
     justify-content: center;
     gap: 16px;
-    font-size: 1.8rem;
+    font-size: 2.3rem;
     color: var(--white);
     margin-bottom: 16px;
   }
-  .tax-credit-example p { color: rgba(245,248,252,0.78); font-size: 0.92rem; margin: 0; }
+  .tax-credit-example p { color: rgba(245,248,252,0.78); font-size: 1.08rem; margin: 0; }
+  @media (max-width: 480px) {
+    /* La ligne "600 $ → ≈ 360 $" à 2.3rem ne wrap pas et forçait le track de
+       grille (et donc toute la page) à s'élargir sous 480px — on la laisse
+       rétrécir/wrapper ici plutôt que de dépendre uniquement du minmax(0, 1fr)
+       ci-dessus. */
+    .tax-credit-math { font-size: 1.7rem; gap: 10px; flex-wrap: wrap; }
+  }
 
   /* ---------- ZONES ---------- */
   .zones-section { background: var(--navy); color: var(--white); }
@@ -699,9 +722,13 @@
     font-size: 0.92rem;
     padding: 12px;
     border-radius: 999px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
+  .sticky-btn:hover { transform: scale(1.05); }
   .sticky-btn-call { background: var(--ice); color: var(--navy); border: 1.5px solid #d7e0ea; }
+  .sticky-btn-call:hover { box-shadow: 0 0 16px rgba(10, 24, 48, 0.25); }
   .sticky-btn-form { background: var(--red); color: var(--white); }
+  .sticky-btn-form:hover { box-shadow: 0 0 20px rgba(227, 57, 43, 0.55); }
 
   /* ---------- MODAL DE SOUMISSION ---------- */
   .submission-modal-overlay {
@@ -757,9 +784,14 @@
     background: var(--ice);
     color: var(--navy);
     cursor: pointer;
-    transition: border-color 0.15s ease, background 0.15s ease;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .wizard-type-choice:hover { border-color: var(--red); background: var(--white); }
+  .wizard-type-choice:hover {
+    border-color: var(--red);
+    background: var(--white);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(227, 57, 43, 0.3);
+  }
 
   .visually-hidden {
     position: absolute;

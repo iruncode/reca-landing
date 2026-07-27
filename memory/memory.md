@@ -60,5 +60,11 @@
 - Décision utilisateur : **tous** les boutons "Soumission gratuite" du site (Nav, Hero, `MobileStickyBar`) ouvrent ce même popup — plus aucun ne fait défiler vers `#contact`. Seuls 2 liens contextuels mineurs pointent encore vers `#contact` par ancre classique et scrollent normalement : le lien "Demandez quand même votre soumission" dans `Zones.tsx` et l'item de liste "Soumission gratuite" dans `Footer.tsx` — la section reste sur la page donc ces liens fonctionnent toujours, comportement volontairement laissé tel quel (non mentionné par l'utilisateur).
 - CSS : `.submission-modal` agrandi (`max-width: 520px`, `max-height: 90vh`, `overflow-y: auto`) pour loger le wizard complet ; le sélecteur de style du formulaire est passé de `form#contact-form` (id, incompatible avec le préfixe dynamique) à `form.wizard-form` (classe) — avec une règle spécifique retirant le double encadré (`box-shadow`/`border`/`padding`) quand le formulaire est affiché à l'intérieur du modal, puisque le modal fournit déjà son propre cadre.
 
+## Piège CSS Grid — `1fr` ne rétrécit pas sous la taille du contenu (2026-07-26)
+- Constaté dans `.tax-credit-layout` (`TaxCredit.tsx`) : passer `.tax-credit-math` à une police plus grosse a fait déborder toute la page horizontalement sous 480px, alors que la grille passe bien en une seule colonne (`grid-template-columns: 1fr`) sous 900px.
+- **Cause** : un track de grille en `1fr` seul a quand même une taille minimale automatique = la taille min-content de son contenu (ici, la ligne "600 $ → ≈ 360 $" qui ne wrap pas). C'est l'équivalent CSS Grid du piège `min-width: auto` des flex items déjà rencontré sur ce projet (voir le fix du bouton "Retour" du wizard, branche `optimisation-mobile`).
+- **Fix** : utiliser `grid-template-columns: minmax(0, 1fr)` au lieu de `1fr` seul quand un enfant risque d'avoir un contenu large et non sécable (montants, mots longs, etc.).
+- Si une future section a une grille à une colonne qui déborde horizontalement sur mobile malgré un `1fr`, c'est probablement ce même piège.
+
 ## Essayé et rejeté
 - (rien à ce jour)

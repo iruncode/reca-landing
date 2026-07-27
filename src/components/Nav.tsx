@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MenuIcon } from './icons';
 
 const LINKS = [
+  { href: '#problemes-solutions', label: 'Comment ça marche?' },
   { href: '#services', label: 'Services' },
   { href: '#credit-impot', label: "Crédit d'impôt" },
   { href: '#zones', label: 'Zones desservies' },
